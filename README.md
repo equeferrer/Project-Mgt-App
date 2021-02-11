@@ -1,5 +1,10 @@
 # README
 
+Project Management App
+- Test Driven Development (TDD)
+- Nested Resources
+- Devise
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
