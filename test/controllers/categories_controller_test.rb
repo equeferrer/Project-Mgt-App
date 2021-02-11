@@ -6,39 +6,39 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
     @category = Category.create(title: 'Category 1')
   end
 
-  test "1a. should get index" do
+  test "01. should get index" do
     get categories_path
     assert_response :success
   end
 
-  test "1b. should get new" do
+  test "02. should get new, create category, then redirect" do
     get new_category_path
     assert_response :success
+
+    assert_difference('Category.count', 1) do
+      post categories_path(@category),
+      params: { category: { title: 'Category 1' } } 
+      assert_response :redirect
+    end
   end
 
-  test "1c. should create category" do
-    post create_category_path, params: { category: { 
-      title: 'Category 1',
-    } } 
-  end
-
-  test "1d. should get edit" do
-    get category_edit_path(@category)
+  test "03. should get edit" do
+    get edit_category_path(@category)
     assert_response :success
   end
 
-  test "1e. should be able to edit category title" do
-    patch category_update_path(@category), params: {
+  test "04. should be able to update category title" do
+    patch category_path(@category), params: {
       category: { title: 'New Title' }
     }
     
     assert Category.find(@category.id).title == 'New Title' 
-    # assert_redirected_to root_path
+    assert_redirected_to categories_path
   end
 
-  test "1f. should delete category" do
+  test "05. should delete category" do
     assert_difference('Category.count', -1) do
-      delete category_delete_path @category
+      delete category_path @category
     end
   end
 end
