@@ -20,11 +20,11 @@ class CategoriesController < ApplicationController
   end
 
   def edit
-    @category = Category.find(params[:id])
+    @category = Category.find(set_category)
   end
 
   def update
-    @category = Category.find(params[:id])
+    @category = Category.find(set_category)
     if @category.update(category_params)
       redirect_to categories_path
     else 
@@ -33,16 +33,16 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    @category = Category.find(params[:id])
+    @category = Category.find(set_category)
     @category.destroy
     redirect_to categories_path
   end
 
   private
 
-  # def set_category
-  #   params[:id]
-  # end
+  def set_category
+    params[:id]
+  end
 
   def category_params
     params.require(:category).permit(:title)
