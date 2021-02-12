@@ -47,5 +47,6 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     assert_difference('Task.count', -1) do
       delete category_task_path @category,@task
     end
+    assert_redirected_to category_tasks_path
   end
 end
