@@ -20,7 +20,7 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     assert_difference('Category.count', 1) do
-      post project_categories_path @category,
+      post project_categories_path @project,
       params: { category: { title: 'Category 2' } } 
       # assert_response :redirect
     end
