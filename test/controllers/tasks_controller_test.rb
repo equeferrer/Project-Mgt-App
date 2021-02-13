@@ -2,9 +2,11 @@ require "test_helper"
 
 class TasksControllerTest < ActionDispatch::IntegrationTest
   def setup
-    @category = Category.create(title: 'Category 1')
-    @task = @category.tasks.create(name: "First Task!", description: "Testing Nested Resources", priority_level: "1")
+    @project = Project.create(name: 'Project 1')
+    @category = Category.create(title: 'Category 1', project_id: @project.id)
+    @task = @category.tasks.create(name: "First Task!", description: "Testing Nested Resources", priority_level: "1", category_id: @category.id)
     
+    @project.save
     @category.save
     @task.save
   end
@@ -31,22 +33,20 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "04. should get edit" do
-    get edit_category_task_path @category, @task
+    get edit_task_path @task
     assert_response :success
   end
 
-  test "04. should be able to update category title, description, duedate, priority level" do
-    patch category_task_path @category,@task,
-    params: {
-      task: { name: 'Edited Task', description: "Edited Description", priority_level: "2", due_date: "2021-02-12" }
-    }
-    assert_redirected_to category_tasks_path
+  test "05. should be able to update category title, description, duedate, priority level" do
+    patch task_path @task,
+    params: { task: { name: 'Edited Task', description: "Edited Description", priority_level: "2", due_date: "2021-02-12" } }
+    assert_redirected_to task_path
   end
 
-  test "05. should delete category" do
+  test "06. should delete category" do
     assert_difference('Task.count', -1) do
-      delete category_task_path @category,@task
+      delete task_path @task
     end
-    assert_redirected_to category_tasks_path
+    # assert_redirected_to category_tasks_path
   end
 end

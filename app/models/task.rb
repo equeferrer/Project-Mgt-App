@@ -4,5 +4,3 @@ class Task < ApplicationRecord
 
   belongs_to :category
 end
-
-# High priority (red flag), Medium priority (orange flag), Low priority (yellow flag), and none (no flag)

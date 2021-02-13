@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :get_category 
+  before_action :get_category, only: [:index, :new, :create]
 
   def index
     @tasks = @category.tasks
@@ -7,7 +7,6 @@ class TasksController < ApplicationController
   
   def new 
     @task = @category.tasks.build 
-	  #built-in way to instantiate 
   end
 
   def create
@@ -20,28 +19,30 @@ class TasksController < ApplicationController
   end
 
   def edit
+    @task = Task.find(params[:id])
   end
 
   def update
-    @task = @category.tasks.find(params[:id])
+    @task = Task.find(params[:id])
     if @task.update(task_params)
-      redirect_to category_tasks_path
+      redirect_to task_path
     else 
       render :edit
     end
   end
 
   def destroy
-    @task = @category.tasks.find(params[:id])
-    if @task.destroy
-      redirect_to category_tasks_path
-    else
-      render :edit
-    end
+    @task = Task.find(params[:id])
+    @task.destroy
+      # redirect_to category_tasks_path @category
+    # else
+    #   render :edit
+    # end
   end
 
   private
   def get_category
+    # @project = Project.find(params[:project_id])
     @category = Category.find(params[:category_id])
   end
 

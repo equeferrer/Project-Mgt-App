@@ -1,19 +1,18 @@
 class CategoriesController < ApplicationController
+  before_action :get_project, only: [:index, :new, :create]
 
   def index
-    @category = Category.new
+    @category = @project.categories
   end
 
   def new
-    @category = Category.new
+    @category = @project.categories.build
   end
 
   def create
-    @category = Category.new(category_params)
-    # category.title = params[:title]
-    
+    @category = @project.categories.build(category_params)
     if @category.save
-      redirect_to categories_path
+      redirect_to project_categories_path
     else
       render :new
     end
@@ -26,7 +25,7 @@ class CategoriesController < ApplicationController
   def update
     @category = Category.find(set_category)
     if @category.update(category_params)
-      redirect_to categories_path
+      redirect_to category_path
     else 
       render :edit
     end
@@ -35,16 +34,22 @@ class CategoriesController < ApplicationController
   def destroy
     @category = Category.find(set_category)
     @category.destroy
-    redirect_to categories_path
+    # @project = Project.find(params[:project_id])
+    # redirect_to project_categories_path @project
+    # if else render?
   end
 
   private
-
+  def get_project
+    # @project = Project.new
+    @project = Project.find(params[:project_id])
+  end
+  
   def set_category
     params[:id]
   end
 
   def category_params
-    params.require(:category).permit(:title)
+    params.require(:category).permit(:title, :project_id)
   end
 end

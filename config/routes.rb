@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
 
-  # resources :categories
+  # resources :categories do
+  #   resources :tasks
+  # end
 
-  resources :categories do
-    resources :tasks
+  resources :projects, shallow: true do
+    resources :categories do
+      resources :tasks
+    end
   end
-
+  
 end

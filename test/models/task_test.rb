@@ -2,15 +2,13 @@ require "test_helper"
 
 class TaskTest < ActiveSupport::TestCase
   def setup
-    @category = Category.create(title: 'Category 1')
-    @task = Task.create(name: "Task", 
-                        description: "Testing Nested Resources", 
-                        priority_level: "1", 
-                        due_date: "2021-02-15",
-                        category_id: @category.id)
+    @project = Project.create(name: 'Project 1')
+    @category = Category.create(title: 'Category 1', project_id: @project.id)
+    @task = Task.create(name: "Task", description: "Testing Nested Resources", 
+                        priority_level: "1", due_date: "2021-02-15", category_id: @category.id)                   
   end
 
-  test "01. should be able to assign task to category" do
+  test "01a. should not save when task is not assigned to category" do
     @task.category_id = ''
     assert_not @task.save,  'Saved task without category'
     # @category.tasks.create(name: "First Task!", description: "Testing Nested Resources", priority_level: "1")
@@ -42,9 +40,3 @@ class TaskTest < ActiveSupport::TestCase
   end
 
 end
-
-
-# t.string :name
-# t.string :description
-# t.integer :priority_level
-# t.datetime :due_date
