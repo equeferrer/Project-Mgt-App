@@ -1,0 +1,34 @@
+<h1> Edit Project</h1>
+
+<%#= form_with scope:@article, url:article_update_path, do |f| %>
+<%= form_for @project, url:project_path(@project) do |f| %>
+<%#= form_with scope:@project, url: edit_project_path(@project) do |f| %>
+
+<%#= form_for url: article_update_path(@article), local:true do |f| %>
+<%#= form_with scope:@article, url: article_create_path , local:true do |f| %>
+
+	<p>
+	   <%= f.label :name %> <br/>
+	   <%= f.text_field :name %>
+	</p> 
+
+	<p>
+	   <%= f.label :description %> <br/>
+	   <%= f.text_area :description%> <%#, style: 'width:100%;', :columns => 100, :rows => 5 %>
+	</p> 
+
+	<p>
+	   <%= f.submit "Update Post" %> <br/>
+	</p> 
+<% end %>
+
+<p>
+	<% if @project.errors.any?%>
+		<ul>
+			<% @project.errors.full_messages.each do |message| %>
+				<li> <%= message %> </li>
+			<% end %>
+		</ul>
+
+	<% end%>
+</p>

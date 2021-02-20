@@ -1,15 +1,22 @@
 class ProjectsController < ApplicationController
-  
+  before_action :authenticate_user!
+
   def index
-    @project = Project.new
+    @projects = current_user.projects
   end
 
   def new
-    @project = Project.new
+    @project = current_user.projects.build
+    @projects = current_user.projects
+  end
+
+  def show
+    @project = current_user.projects.find(set_project)
   end
 
   def create
-    @project = Project.new(project_params)
+    @project = current_user.projects.build(project_params)
+    @projects = current_user.projects
     # category.title = params[:title]
     
     if @project.save
@@ -20,11 +27,11 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    @project = Project.find(set_project)
+    @project = current_user.projects.find(set_project)
   end
 
   def update
-    @project = Project.find(set_project)
+    @project = current_user.projects.find(set_project)
     if @project.update(project_params)
       redirect_to projects_path
     else 
@@ -33,9 +40,9 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    @project = Project.find(set_project)
+    @project = current_user.projects.find(set_project)
     @project.destroy
-    # redirect_to categories_path
+    redirect_to projects_path
   end
 
   private
@@ -45,6 +52,6 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:name)
+    params.require(:project).permit(:name, :description)
   end
 end

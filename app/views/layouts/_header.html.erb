@@ -1,10 +1,38 @@
-<% if user_signed_in?%>
-  <li> <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class:"" %> </li>
-
-  <li> <%= link_to "Edit Profile", edit_user_registration_path, class:"" %> </li>
-<% else %>
-  <li> <%= link_to "Sign Up", new_user_registration_path, class:"" %> </li>
-
-  <li> <%= link_to "Sign In", new_user_session_path, class:"" %> </li>
-
-<% end %>
+<header id="header"> 
+  <nav id="nav-bar">
+    <div></a><%= link_to "Workday", root_path%><img src="" id="header-img" alt=""></a></div>
+  <!-- MENU TOGGLER -->
+    <input type="checkbox" class="toggle-menu"> 
+    <div class="hamburger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+    <ul class="navigation">
+        <!-- Nav Item 1 -->
+      <% if user_signed_in? %>
+        <%# <div class="d-flex flex-row flex-nowrap"> %>
+          <li class="nav-item">
+            <%= link_to 'Home', root_path, class:"nav-link"%>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/projects">Projects</a>
+          </li>
+        <%# </div> %>
+      <% end %>
+    <%# </ul> %>
+    <%# <div class="float-right my-2 my-lg-0"> %>
+      <% if user_signed_in?%>
+        <%# <div class="d-flex flex-row flex-nowrap"> %>
+          <li class=""> <%= link_to "Edit Profile", edit_user_registration_path, class:"btn btn-primary" %> </li>
+          <li class=""> <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class:"btn btn-dark" %> </li>
+        <%# </div> %>
+      <% else %>
+        <%# <div class="d-flex flex-row flex-nowrap"> %>
+          <li class="nav-item"> <%= link_to "Sign In", new_user_session_path, class:"btn btn-light my-2 my-sm-0 ml-5" %> </li>
+          <li class="nav-item"> <%= link_to "Sign Up", new_user_registration_path, class:"btn btn-primary my-2 my-sm-0 ml-5" %> </li>
+        <%# </div> %>
+      <% end %>
+    </ul>
+  </nav>
+</header>

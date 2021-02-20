@@ -3,8 +3,15 @@ require "test_helper"
 class CategoriesControllerTest < ActionDispatch::IntegrationTest
 
   def setup
-    @project = Project.create(name: 'Project 1')
-    @category = Category.create(title: 'Category 1', project_id: @project.id)
+    get '/users/sign_in'
+    sign_in users(:user_001)
+    post user_session_url
+    # sign_in User.create(email: 'user@example.com', password: '123456', password_confirmation: '123456',
+    #         first_name: 'First', last_name: 'User')
+    # get root_url
+    # assert_response :success
+    @project = Project.create(name: 'New Project', user_id: 1)
+    @category = Category.create(title: 'Category 1', project_id: @project.id, user_id: 1)
 
     @project.save
     @category.save
@@ -19,9 +26,9 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
     get new_project_category_path @project
     assert_response :success
 
-    assert_difference('Category.count', 1) do
+    assert_difference('@project.categories.count', 1) do
       post project_categories_path @project,
-      params: { category: { title: 'Category 2' } } 
+      params: { category: { title: 'Category 2', user_id: 1 } } 
       # assert_response :redirect
     end
   end
@@ -34,13 +41,19 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
   test "04. should be able to update category title, redirects after" do
     patch category_path @category, params: { category: { title: 'New Title' } }
     # assert Category.find(@category.id).title == 'New Title' 
-    assert_redirected_to category_path
+    assert_redirected_to project_path(@category.project_id)
   end
 
   test "05. should delete category" do
     assert_difference('Category.count', -1) do
       delete category_path @category
     end
-    # REDIRECT
+    assert_redirected_to project_path @project
+  end
+
+  test "06. should not get new if not logged in" do
+    sign_out :user
+    get new_project_category_path @project
+    assert_redirected_to new_user_session_path
   end
 end

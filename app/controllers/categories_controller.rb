@@ -1,8 +1,9 @@
 class CategoriesController < ApplicationController
+  before_action :authenticate_user!
   before_action :get_project, only: [:index, :new, :create]
 
   def index
-    @category = @project.categories
+    @categories = @project.categories
   end
 
   def new
@@ -11,8 +12,10 @@ class CategoriesController < ApplicationController
 
   def create
     @category = @project.categories.build(category_params)
+    @category.user_id = current_user.id
+    @category.project_id = @project.id
     if @category.save
-      redirect_to project_categories_path
+      redirect_to project_path @project
     else
       render :new
     end
@@ -25,7 +28,7 @@ class CategoriesController < ApplicationController
   def update
     @category = Category.find(set_category)
     if @category.update(category_params)
-      redirect_to category_path
+      redirect_to project_path(@category.project_id)
     else 
       render :edit
     end
@@ -35,14 +38,14 @@ class CategoriesController < ApplicationController
     @category = Category.find(set_category)
     @category.destroy
     # @project = Project.find(params[:project_id])
-    # redirect_to project_categories_path @project
+    redirect_to project_path(@category.project_id)
     # if else render?
   end
 
   private
   def get_project
     # @project = Project.new
-    @project = Project.find(params[:project_id])
+    @project = current_user.projects.find(params[:project_id])
   end
   
   def set_category
@@ -50,6 +53,6 @@ class CategoriesController < ApplicationController
   end
 
   def category_params
-    params.require(:category).permit(:title, :project_id)
+    params.require(:category).permit(:title, :project_id, :user_id)
   end
 end

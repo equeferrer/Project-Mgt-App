@@ -1,0 +1,25 @@
+<h1> NEW TASK </h1>
+
+	<% if @task.errors.any?%>
+		<div class="alert alert-warning alert-dismissible" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<strong>Whoops!</strong> <%= @task.errors.full_messages.to_sentence %>
+		</div>
+	<% end%>
+<%# <div class="d-flex justify-content-between p-5">
+  <h1> Welcome! </h1>
+  <button class="btn custom-btn-2" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+		Create Post
+  </button>
+</div> %>
+
+
+<div class="container mx-5 my-5">
+  <div class="">
+		<div>
+    <%= render 'form' %>
+		
+    </div>
+  </div>
+  <br/> <br/>
+</div>

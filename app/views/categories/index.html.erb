@@ -1,0 +1,47 @@
+<h1> INDEX CATEGORIES </h1>
+
+<div class="container mt-1 p-5">
+  <table class="table table-light table-striped table-bordered table-hover" style="overflow-x:auto;">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th colspan="3">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @categories.each do |category| %>
+      <tr>
+        <td> <%=category.id%></td>
+        <td> <%=category.title%></td>
+        <td> <%= link_to "View", project_categories_path(category)%> </td>
+        <td> <%= link_to "Edit", edit_category_path(category)%> </td> 
+        <td> <%= link_to "Delete", category_path(category), :method => :Delete, data: {confirm: "Are you sure you want to delete this?"} %></td>
+        <td> <%= link_to "View Tasks", category_tasks_path(category)%> </td>
+        <td> <%= link_to "New Task", new_category_task_path(category)%> </td>
+      </tr>
+        <% category.tasks.each do |task| %>
+          <tr>
+            <td> <%=task.id%></td>
+            <td> <%=task.name%></td>
+            <td> <%=task.description%></td>
+            <td> <%=task.priority_level%></td>
+            <td> <%=task.due_date%></td>
+
+            <td> <%= link_to "View", category_tasks_path(task)%> </td>
+            <td> <%= link_to "Edit", edit_task_path(task)%> </td> 
+            <td> <%= link_to "Delete", task_path(task), :method => :Delete, data: {confirm: "Are you sure you want to delete this?"} %></td>
+          </tr>
+        <% end %>
+
+      <%# </tr> %>
+      <% end %>
+    </tbody>
+  </table>
+  <br/>
+  <%= link_to "Back to Home", root_path, class:"btn btn-secondary"%>
+  <%= link_to "Back to Projects", projects_path, class:"btn btn-secondary"%>
+  <%= link_to "New Category for this project", new_project_category_path, class:"btn btn-secondary"%>
+
+
+</div>

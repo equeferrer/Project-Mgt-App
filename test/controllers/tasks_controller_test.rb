@@ -2,9 +2,12 @@ require "test_helper"
 
 class TasksControllerTest < ActionDispatch::IntegrationTest
   def setup
-    @project = Project.create(name: 'Project 1')
-    @category = Category.create(title: 'Category 1', project_id: @project.id)
-    @task = @category.tasks.create(name: "First Task!", description: "Testing Nested Resources", priority_level: "1", category_id: @category.id)
+    get '/users/sign_in'
+    sign_in users(:user_001)
+    post user_session_url
+    @project = Project.create(name: 'Project 1', user_id: 1)
+    @category = Category.create(title: 'Category 1', project_id: @project.id, user_id: 1)
+    @task = @category.tasks.create(name: "First Task!", description: "Testing Nested Resources", priority_level: "1", category_id: @category.id, user_id: 1, project_id: @category.project_id)
     
     @project.save
     @category.save
@@ -27,7 +30,7 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
 
     assert_difference('Task.count', 1) do
       post category_tasks_path @category, params: { 
-        task: { name: "First Task!", description: "Testing Nested Resources", priority_level: "1" } } 
+        task: { name: "First Task!", description: "Testing Nested Resources", priority_level: "1", user_id: 1, project_id:@category.project_id } } 
       # assert_response :redirect
     end
   end

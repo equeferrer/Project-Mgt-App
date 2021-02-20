@@ -1,0 +1,22 @@
+<%= form_with scope:@task, url: category_tasks_path , local:true do |f| %>
+  <div class="form-group ml-5 mr-5">
+    <div class="input-group mb-3">
+      <span class="input-group-text ml-5">Name*</span>
+      <%= f.text_field :name, class:"form-control mr-5 ml-n1" %><br>
+
+      <span class="input-group-text ml-5">Description</span>
+      <%= f.text_field :description, class:"form-control mr-5 ml-n1" %> <br>
+
+      <span class="input-group-text ml-5">Priority Level*</span>
+      <%= f.text_field :priority_level, class:"form-control mr-5 ml-n1" %><br>
+
+      <span class="input-group-text ml-5">Due_date</span> 
+      <%= f.text_field :due_date, class:"form-control mr-5 ml-n1" %> <br>
+
+    </div>
+    <div class="mr-5 mt-2 mb-3">
+      <div style="float:right"> <%= f.submit :Submit, class: 'btn btn-primary' %> <br/> </div>
+    </div>
+  </div>
+<% end %>
+

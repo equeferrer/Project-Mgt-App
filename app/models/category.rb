@@ -1,5 +1,6 @@
 class Category < ApplicationRecord
   validates :title, presence:true
   belongs_to :project 
-  has_many :tasks
+  belongs_to :user
+  has_many :tasks, dependent: :destroy
 end

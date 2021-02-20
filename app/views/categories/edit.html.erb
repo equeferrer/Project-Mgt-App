@@ -1,0 +1,28 @@
+<h1> Edit Category</h1>
+
+<%#= form_for scope:@category, url:category_path(@category) do |f| %>
+<%= form_for @category, url:category_path(@category) do |f| %>
+<%#= form_with scope:@project, url: edit_project_path(@project) do |f| %>
+
+<%#= form_for url: article_update_path(@article), local:true do |f| %>
+<%#= form_with scope:@article, url: article_create_path , local:true do |f| %>
+
+	<p>
+	   <%= f.label :title %> <br/>
+	   <%= f.text_field :title %>
+	</p> 
+	<p>
+	   <%= f.submit "Update Post" %> <br/>
+	</p> 
+<% end %>
+
+<p>
+	<% if @category.errors.any?%>
+		<ul>
+			<% @category.errors.full_messages.each do |message| %>
+				<li> <%= message %> </li>
+			<% end %>
+		</ul>
+
+	<% end%>
+</p>

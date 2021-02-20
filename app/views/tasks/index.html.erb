@@ -1,0 +1,38 @@
+<h1> INDEX TASKS </h1>
+
+<div class="container mt-1 p-5">
+  <table class="table table-light table-striped table-bordered table-hover" style="overflow-x:auto;">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Priority Level</th>
+        <th>Due Date</th>
+        <th colspan="3">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tasks.each do |task| %>
+      <tr>
+        <td> <%=task.id%></td>
+        <td> <%=task.name%></td>
+        <td> <%=task.description%></td>
+        <td> <%=task.priority_level%></td>
+        <td> <%=task.due_date%></td>
+
+        <td> <%= link_to "View", category_tasks_path(task)%> </td>
+        <td> <%= link_to "Edit", edit_task_path(task)%> </td> 
+        <td> <%= link_to "Delete", task_path(task), :method => :Delete, data: {confirm: "Are you sure you want to delete this?"} %></td>
+      </tr>
+    </tbody>
+  </table>
+  <br/>
+  <%= link_to "Back to Home", root_path, class:"btn btn-secondary"%>
+  <%= link_to "Back to Projects", projects_path, class:"btn btn-secondary"%>
+  <%= link_to "Back to this Project", project_categories_path(task.project_id), class:"btn btn-secondary"%>
+  <%= link_to "New Task for this Category", new_category_task_path, class:"btn btn-secondary"%>
+
+  <% end %>
+
+</div>

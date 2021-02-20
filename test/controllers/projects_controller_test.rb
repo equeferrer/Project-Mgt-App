@@ -2,7 +2,15 @@ require "test_helper"
 
 class ProjectsControllerTest < ActionDispatch::IntegrationTest
   def setup
-    @project = Project.create(name: 'New Project')
+    get '/users/sign_in'
+    sign_in users(:user_001)
+    post user_session_url
+    # sign_in User.create(email: 'user@example.com', password: '123456', password_confirmation: '123456',
+    #         first_name: 'First', last_name: 'User')
+    # get root_url
+    # assert_response :success
+    @project = Project.create(name: 'New Project', user_id: 1)
+    @project.save
   end
 
   test "01. should get index" do
@@ -38,5 +46,11 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
       delete project_path @project
     end
     # Redirect
+  end
+
+  test "06. should not get new if not logged in" do
+    sign_out :user
+    get new_project_path
+    assert_redirected_to new_user_session_path
   end
 end
