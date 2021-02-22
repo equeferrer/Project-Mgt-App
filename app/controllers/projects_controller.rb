@@ -65,5 +65,4 @@ class ProjectsController < ApplicationController
   def user_is_owner?
     redirect_to projects_path unless current_user.id == @project.user_id 
   end
- 
 end

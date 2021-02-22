@@ -1,17 +1,19 @@
 class TasksController < ApplicationController
   before_action :authenticate_user!
   before_action :get_category, only: [:index, :new, :create]
+  before_action :set_task_user, only: [:edit, :update, :destroy]
+  before_action :owns_task?, only: [:edit, :update, :destroy]
 
   # def index
   #   @tasks = @category.tasks
   # end
   
   def new 
-    @task = @category.tasks.build 
+    @task = current_user.tasks.build 
   end
 
   def create
-    @task = @category.tasks.build(task_params)
+    @task = current_user.tasks.build(task_params)
     @task.user_id = current_user.id
     @task.category_id = @category.id
     @task.project_id = @category.project_id
@@ -23,11 +25,11 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task = Task.find(set_project)
+    @task = current_user.tasks.find(set_project)
   end
 
   def update
-    @task = Task.find(set_project)
+    @task = current_user.tasks.find(set_project)
     if @task.update(task_params)
       redirect_to project_path(@task.project_id)
     else 
@@ -36,7 +38,7 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    @task = Task.find(set_project)
+    @task = current_user.tasks.find(set_project)
     @task.destroy
     redirect_to project_path(@task.project_id)
   end
@@ -52,5 +54,13 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).permit(:name, :category_id, :description, :priority_level, :due_date, :user_id, :project_id)
+  end
+
+  def set_task_user
+    @task = Task.find(params[:id])
+  end
+  
+  def owns_task?
+    redirect_to projects_path unless current_user.id == @task.user_id 
   end
 end
