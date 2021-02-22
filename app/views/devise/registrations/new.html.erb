@@ -1,38 +1,47 @@
-<div class="container">
-  <h2>Sign up</h2>
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="form-floating mb-1">
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", id: "floatingEmail", placeholder: "name@example.com"  %>
-    <%= f.label :email, for: "floatingEmail" %>
-  </div>
+<div class="container mt-5">
+  <div class="form-layout-center account-form mt-5">
+    <h2 class="text-center mb-4 gray-text">Create an account</h2>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+    <div class="form-row d-flex flex-row justify-content-between">
+      <div class="col form-group col-md-5">
+        <div class="form-floating float-pass-2 mb-1">
+          <%= f.text_field :first_name, autofocus: true, class: "form-control", id: "FirstName", placeholder: "John"  %>
+          <%= f.label :first_name, for: "floatingFirstName" %>
+        </div>
+      </div>
+      <div class="col form-group col-md-5">
+        <div class="form-floating float-pass-2 mb-2">
+          <%= f.text_field :last_name, class: "form-control", id: "floatingLastName", placeholder: "Doe"  %>
+          <%= f.label :last_name, for: "floatingLastName" %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-floating float-pass-2 mb-2">
+      <%= f.email_field :email, autocomplete: "email", class: "form-control", id: "floatingEmail", placeholder: "name@example.com"  %>
+      <%= f.label :email, for: "floatingEmail" %>
+    </div>
   
-  <div class="form-floating mb-1">
-    <%= f.text_field :first_name, class: "form-control", id: "FirstName", placeholder: "John"  %>
-    <%= f.label :first_name, for: "floatingFirstName" %>
-  </div>
+    <div class="form-floating float-pass-2 mb-2">
+      <%= f.password_field :password, autocomplete: "new-password", class:"form-control", id:"floatingPassword", placeholder:"Password" %>
+      <%= f.label "Password (#{@minimum_password_length} characters minimum)", for: "floatingPassword" %>  
+    </div>
 
-  <div class="form-floating mb-1">
-    <%= f.text_field :last_name, class: "form-control", id: "floatingLastName", placeholder: "Doe"  %>
-    <%= f.label :last_name, for: "floatingLastName" %>
-  </div>
+    <div class="form-floating float-pass-2 mb-4">
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control", id:"floatingPasswordConfirm", placeholder:"Confirm Password" %>
+      <%= f.label :password_confirmation, for: "floatingPasswordConfirm" %>
+    </div>
 
-  <div class="form-floating mb-1">
-    <%= f.password_field :password, autocomplete: "new-password", class:"form-control", id:"floatingPassword", placeholder:"Password" %>
-    <%= f.label "Password (#{@minimum_password_length} characters minimum)", for: "floatingPassword" %>  
-  </div>
+    <div class="actions text-center mt-3 mb-5">
+      <%= f.submit "Sign up", class:"btn btn-custom-success", style:"width:100%" %>
+    </div>
+  <% end %>
 
-  <div class="form-floating mb-1">
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control", id:"floatingPasswordConfirm", placeholder:"Confirm Password" %>
-    <%= f.label :password_confirmation, for: "floatingPasswordConfirm" %>
+  <hr/>
+  <%- if controller_name != 'sessions' %>
+    <div class="text-center gray-text"> <small> <%= link_to "Already have an account? Log in", new_session_path(resource_name) %></small> </div>
+  <% end %>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%- if controller_name != 'sessions' %>
-  Already have an account? <%= link_to "Log in", new_session_path(resource_name) %><br />
-<% end %>
+</div>
+<%= render 'layouts/bg-images'%>

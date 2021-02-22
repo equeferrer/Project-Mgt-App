@@ -14,10 +14,10 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     @task.save
   end
 
-  test "01. should get index of tasks" do
-    get category_tasks_path @category
-    assert_response :success
-  end
+  # test "01. should get index of tasks" do
+  #   get category_tasks_path @category
+  #   assert_response :success
+  # end
 
   test "02. should get new action of tasks" do
     get new_category_task_path @category
@@ -31,7 +31,7 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     assert_difference('Task.count', 1) do
       post category_tasks_path @category, params: { 
         task: { name: "First Task!", description: "Testing Nested Resources", priority_level: "1", user_id: 1, project_id:@category.project_id } } 
-      # assert_response :redirect
+      assert_response :redirect
     end
   end
 
@@ -43,13 +43,13 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
   test "05. should be able to update category title, description, duedate, priority level" do
     patch task_path @task,
     params: { task: { name: 'Edited Task', description: "Edited Description", priority_level: "2", due_date: "2021-02-12" } }
-    assert_redirected_to task_path
+    assert_redirected_to project_path(@task.project_id)
   end
 
   test "06. should delete category" do
     assert_difference('Task.count', -1) do
       delete task_path @task
     end
-    # assert_redirected_to category_tasks_path
+    assert_redirected_to project_path(@task.project_id)
   end
 end

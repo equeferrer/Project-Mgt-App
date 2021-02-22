@@ -1,54 +1,107 @@
-<div class="container mt-1 p-5">
-  <div class="d-flex justify-content-between align-items-end">
-    <div  class="text-end align-bottom" >
-      <h1 class="p-0"> PROJECT NAME: <%= @project.name %> </h1>
+<div class="container mt-3">
+  <%= link_to "< Back to Projects", projects_path, class:"no-line gray-text" %>
+
+  <div class="d-flex justify-content-between align-items-end mt-2 margin-right-5">
+    <div  class="" >
+      <h1 class="p-0"> <%= @project.name %> </h1>
+      <h5 class="mb-0"> <%= @project.description %> </h5>
     </div>
     <div class="text-end align-bottom" style="text-align: right">
-        <%= link_to "edit", edit_project_path(@project)%></i>
-        | <%= link_to "trash", project_path(@project), :method => :Delete, data: {confirm: "Are you sure you want to delete this?"} %> <br/>
-      <small class="text-end align-bottom "><i>Created: <%= @project.created_at.strftime('%b. %e, %Y')%> </i> </small> <br/>
-      <small class="text-end align-bottom"><i>Last updated: <%= time_ago_in_words(@project.updated_at)%> ago </i> </small> 
+        <div class="d-flex flex-nowrap justify-content-between proj-icons">
+          <%#= link_to "Edit Project", edit_project_path(@project), class:"purple-text" %>
+          <%#= link_to fa_icon("trash"), project_path(@project), :method => :Delete, data: {confirm: "Are you sure you want to delete this?"}, class:"red-icon" %>
+        </div>
+      <small class="text-end align-bottom ">Created: <%= @project.created_at.strftime('%b. %e, %Y')%> </small> <br/>
+      <small class="text-end align-bottom">Last updated: <%= time_ago_in_words(@project.updated_at)%> ago</small> 
     </div>
   </div>
-  <hr/>
-  <p class="mt-4" style="text-indent: 2em"> PROJECT DESCRIPTION: <%= @project.description %> </p>
+  <div class="mt-2">
+    <%= link_to "Edit Project", edit_project_path(@project), class:"purple-text btn small-custom-btn" %>
+    <%= link_to "+ Create new category", new_project_category_path(@project), class:"purple-text btn small-custom-btn mx-2" %>
+    <%= link_to "Delete Project", project_path(@project), :method => :Delete, data: {confirm: "Are you sure you want to delete this? Note that all the tasks and categories of this project will be deleted as well"}, class:"red-icon btn small-custom-btn red-custom-btn" %>
+  </div>
 </div>
 
-<div class="d-flex flex-row overflow-auto mb-5 ml-5">
-  <%# if !@articles.empty? %>
-  <% @project.categories.each do |category| %>
-    <div class="category--card m-2 p-3">
-      <div class="p-4 column">
-        <div  class="text-end align-bottom" >
-          <h1 class="p-0">#<%= category.id %>, <%= category.title%> </h1>
-          <%#= link_to "View", project_categories_path(category)%>
-          <%= link_to "Edit Cat", edit_category_path(category)%>
-         <%= link_to "Delete Cat", category_path(category), :method => :Delete, data: {confirm: "Are you sure you want to delete this?"} %>
-        </div>
-        <hr/>
-        <div>
-          <% category.tasks.each do |task| %>
-          <div class="task--card">
-            task#<%=task.id%>
-            <%=task.name%>
-            <%=task.description%>
-            <%=task.priority_level%>
-            <%=task.due_date%>
-            <%#= link_to "View", category_tasks_path(task)%>
-            <%= link_to "Edit Task", edit_task_path(task)%> 
-            <%= link_to "Delete Task", task_path(task), :method => :Delete, data: {confirm: "Are you sure you want to delete this?"} %> <br>
+  <hr/>
+
+<div class="category--container" id="category--container">
+  <div class="d-flex flex-row overflow-auto mb-5 ml-5">
+    <% @project.categories.each do |category| %>
+      <div class="category--card m-1 mb-5">
+        <div class="p-2 column">
+          <div  class="mt-1 d-flex flex-row justify-content-between" >
+            <h5 class="pad-title purple-text"><%= category.title%> </h5>
+            <%#= link_to "View", project_categories_path(category)%>
+            <div class="col-md-2 d-flex justify-content-between mx-3">
+              <small class="blue-text"><%= link_to fa_icon("edit"), edit_category_path(category)%></small> 
+              <small> <%= link_to fa_icon("trash"), category_path(category), :method => :Delete, data: {confirm: "Are you sure you want to delete this?"}, class:'red-icon' %> </small>
+            </div>
           </div>
-          <% end %>
+          <%# <hr/> %>
+          <div>
+            <% category.tasks.each do |task| %>
+            <div class="task--card">
+              <div class="d-flex flex-column">
+                <% if task.priority_level %>
+                  <div  class="mt-1 d-flex flex-row justify-content-between" >
+                  <small class="test-prio">High Priority <%=task.priority_level%> </small>
+                    <div class="fa--icon col-md-4 d-flex justify-content-between">
+                      <small class="edit-task-link"> <%= link_to "Edit Task", edit_task_path(task),  class:"edit-task-link small-icon"%> </small>
+                      <small> <%= link_to fa_icon("times"), task_path(task), :method => :Delete, data: {confirm: "Are you sure you want to delete this?"},  class:"red-icon small-icon pad-right" %> </small>
+                    </div>
+                  </div>
+
+                <% else %>
+                  <div  class="mt-1 d-flex flex-row justify-content-end" >
+                    <div class="col-md-2 pad-right">
+                      <%= link_to fa_icon("edit"), edit_task_path(task),  class:"fa--icon"%> |
+                      <%= link_to fa_icon("times"), task_path(task), :method => :Delete, data: {confirm: "Are you sure you want to delete this?"},  class:"fa--icon small-icon red-icon" %>
+                    </div>
+                  </div>
+                <% end %>
+
+
+
+
+
+                <div  class="mt-1 d-flex flex-row justify-content-between" >
+                  <p class="pad-title"><%= task.name%> </p>
+                </div>
+
+                <% if task.due_date %>
+                  <div  class="mt-1 d-flex flex-row justify-content-between" >
+                    <div class="gray-text pad-title"><small> <i class="fa fa-calendar">&nbsp;</i><%= task.due_date.try(:strftime, ("%b. %d"))%> </small></div>
+                    <div class="fa--icon pad-right">
+                      <%#= link_to "Edit Task", edit_task_path(task),  class:"fa--icon" %> 
+                      <%#= link_to "Delete Task", task_path(task), :method => :Delete, data: {confirm: "Are you sure you want to delete this?"},  class:"fa--icon" %>
+                    </div>
+                  </div>
+
+                <% else %>
+                  <div  class="mt-1 d-flex flex-row justify-content-end" >
+                    <div class="col-md-2 fa--icon pad-right">
+                      <%#= link_to fa_icon("edit"), edit_task_path(task),  class:"fa--icon" | %> 
+                      <%#= link_to fa_icon("trash"), task_path(task), :method => :Delete, data: {confirm: "Are you sure you want to delete this?"},  class:"fa--icon red-icon" %>
+                    </div>
+                  </div>
+                <% end %>
+
+              </div>
+            </div>
+            <% end %>
+          </div>
+          <div>
+          <a href="<%= new_category_task_path(category) %>" class="no-line"> 
+            <p class="text-center mb-0 p-2 no-line blue-text create--task"><b> + Create new task </b></p>
+          </a>
+          </div>
         </div>
       </div>
-      <div class="text-end p-2 mr-3" style="text-align:right">
-        <td> <%= link_to "New Task", new_category_task_path(category)%> </td>
-      </div>
-    </div>
-  <% end %>
-  <div class="category--card m-2 p-3"> 
-    <div class="column"> 
-      <%= link_to "New Category", new_project_category_path(@project)%> 
-    </div>
+    <% end %>
+
+          <a href="<%= new_project_category_path(@project) %>" class="no-line category--card mt-1 m-2 p-3 light--category"> 
+            <p class="text-center mb-0 p-2 no-line purple-text"><b> + Create new category </b></p>
+          </a>
+
   </div>
 </div>

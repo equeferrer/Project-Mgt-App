@@ -2,9 +2,9 @@ class CategoriesController < ApplicationController
   before_action :authenticate_user!
   before_action :get_project, only: [:index, :new, :create]
 
-  def index
-    @categories = @project.categories
-  end
+  # def index
+  #   @categories = @project.categories
+  # end
 
   def new
     @category = @project.categories.build
@@ -37,14 +37,11 @@ class CategoriesController < ApplicationController
   def destroy
     @category = Category.find(set_category)
     @category.destroy
-    # @project = Project.find(params[:project_id])
     redirect_to project_path(@category.project_id)
-    # if else render?
   end
 
   private
   def get_project
-    # @project = Project.new
     @project = current_user.projects.find(params[:project_id])
   end
   

@@ -2,9 +2,9 @@ class TasksController < ApplicationController
   before_action :authenticate_user!
   before_action :get_category, only: [:index, :new, :create]
 
-  def index
-    @tasks = @category.tasks
-  end
+  # def index
+  #   @tasks = @category.tasks
+  # end
   
   def new 
     @task = @category.tasks.build 
@@ -15,8 +15,8 @@ class TasksController < ApplicationController
     @task.user_id = current_user.id
     @task.category_id = @category.id
     @task.project_id = @category.project_id
-    if @task.save
-	    redirect_to category_tasks_path
+    if @task.save 
+	    redirect_to project_path(@task.project_id)
     else 
       render :new
     end
@@ -29,7 +29,7 @@ class TasksController < ApplicationController
   def update
     @task = Task.find(set_project)
     if @task.update(task_params)
-      redirect_to task_path #CHANGE REDIRECT
+      redirect_to project_path(@task.project_id)
     else 
       render :edit
     end
@@ -38,7 +38,7 @@ class TasksController < ApplicationController
   def destroy
     @task = Task.find(set_project)
     @task.destroy
-      # redirect_to category_tasks_path @category
+    redirect_to project_path(@task.project_id)
   end
 
   private
@@ -47,7 +47,6 @@ class TasksController < ApplicationController
   end
 
   def get_category
-    # @project = Project.find(params[:project_id])
     @category = Category.find(params[:category_id])
   end
 

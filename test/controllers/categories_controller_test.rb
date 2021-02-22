@@ -6,10 +6,7 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
     get '/users/sign_in'
     sign_in users(:user_001)
     post user_session_url
-    # sign_in User.create(email: 'user@example.com', password: '123456', password_confirmation: '123456',
-    #         first_name: 'First', last_name: 'User')
-    # get root_url
-    # assert_response :success
+
     @project = Project.create(name: 'New Project', user_id: 1)
     @category = Category.create(title: 'Category 1', project_id: @project.id, user_id: 1)
 
@@ -17,10 +14,10 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
     @category.save
   end
 
-  test "01. should get index" do
-    get project_categories_path @project
-    assert_response :success
-  end
+  # test "01. should get index" do
+  #   get project_categories_path @project
+  #   assert_response :success
+  # end
 
   test "02. should get new, create category, then redirect" do
     get new_project_category_path @project
@@ -29,7 +26,7 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
     assert_difference('@project.categories.count', 1) do
       post project_categories_path @project,
       params: { category: { title: 'Category 2', user_id: 1 } } 
-      # assert_response :redirect
+      assert_response :redirect
     end
   end
 

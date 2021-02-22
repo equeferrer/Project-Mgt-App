@@ -1,5 +1,8 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_project_user, only: [:show, :edit, :update, :destroy]
+  before_action :user_is_owner?, only: [:show, :edit, :update, :destroy]
+
 
   def index
     @projects = current_user.projects
@@ -20,7 +23,7 @@ class ProjectsController < ApplicationController
     # category.title = params[:title]
     
     if @project.save
-      redirect_to projects_path
+      redirect_to project_path(@project)
     else
       render :new
     end
@@ -33,7 +36,7 @@ class ProjectsController < ApplicationController
   def update
     @project = current_user.projects.find(set_project)
     if @project.update(project_params)
-      redirect_to projects_path
+      redirect_to project_path(@project)
     else 
       render :edit
     end
@@ -54,4 +57,13 @@ class ProjectsController < ApplicationController
   def project_params
     params.require(:project).permit(:name, :description)
   end
+
+  def set_project_user
+    @project = Project.find(params[:id])
+  end
+  
+  def user_is_owner?
+    redirect_to projects_path unless current_user.id == @project.user_id 
+  end
+ 
 end

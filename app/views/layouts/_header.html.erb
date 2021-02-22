@@ -1,6 +1,6 @@
 <header id="header"> 
   <nav id="nav-bar">
-    <div></a><%= link_to "Workday", root_path%><img src="" id="header-img" alt=""></a></div>
+    <div><%= link_to "Workday", root_path, class:"header-link" %><img src="" id="header-img" alt=""></a></div>
   <!-- MENU TOGGLER -->
     <input type="checkbox" class="toggle-menu"> 
     <div class="hamburger">
@@ -24,13 +24,13 @@
     <%# <div class="float-right my-2 my-lg-0"> %>
       <% if user_signed_in?%>
         <%# <div class="d-flex flex-row flex-nowrap"> %>
-          <li class=""> <%= link_to "Edit Profile", edit_user_registration_path, class:"btn btn-primary" %> </li>
-          <li class=""> <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class:"btn btn-dark" %> </li>
+          <li class=""> <%= link_to "Edit Profile", edit_user_registration_path, class:"btn btn-outline-secondary mx-2" %> </li>
+          <li class=""> <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class:"btn btn-custom-primary mx-2" %> </li>
         <%# </div> %>
       <% else %>
         <%# <div class="d-flex flex-row flex-nowrap"> %>
-          <li class="nav-item"> <%= link_to "Sign In", new_user_session_path, class:"btn btn-light my-2 my-sm-0 ml-5" %> </li>
-          <li class="nav-item"> <%= link_to "Sign Up", new_user_registration_path, class:"btn btn-primary my-2 my-sm-0 ml-5" %> </li>
+          <li class="nav-item"> <%= link_to "Log In", new_user_session_path, class:"btn btn-outline-secondary mx-2" %> </li>
+          <li class="nav-item"> <%= link_to "Get Started", new_user_registration_path, class:"btn  btn-custom-primary mx-2" %> </li>
         <%# </div> %>
       <% end %>
     </ul>

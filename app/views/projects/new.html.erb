@@ -1,38 +1,28 @@
-<h1> NEW PROJECTS </h1>
-
 	<% if @project.errors.any?%>
 		<div class="alert alert-warning alert-dismissible" role="alert">
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			<strong>Whoops!</strong> <%= @project.errors.full_messages.to_sentence %>
 		</div>
 	<% end%>
-<%# <div class="d-flex justify-content-between p-5">
-  <h1> Welcome! </h1>
-  <button class="btn custom-btn-2" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-		Create Post
-  </button>
-</div> %>
 
+  <div class="container mt-5">
+    <div class="form-layout-center account-form mt-5 task--card">
+      <h4 class="text-center mb-4 mt-2 purple-text" style="color:gray">Create a new project</h4>
+			<%= form_with scope:@project, url: projects_path , local:true do |f| %>
+      <div class="form-floating float-pass-2 mb-3 mt-3">
+        <%= f.text_field :name, autofocus: true, class: "form-control", id: "floatingInput", placeholder: "New Project Name" %>
+        <%= f.label "Project Name", for: "floatingInput" %>
+      </div>
 
-<div class="container mx-5 my-5">
-  <div class="">
-		<div>
-		<%= form_with scope:@project, url: projects_path , local:true do |f| %>
-			<div class="form-group ml-5 mr-5">
-				<div class="input-group mb-3">
-					<span class="input-group-text ml-5">Name*</span>
-					<%= f.text_field :name, class:"form-control mr-5 ml-n1" %>
-					<span class="input-group-text ml-5">Description</span>
-					<%= f.text_field :description, class:"form-control mr-5 ml-n1" %>
-				</div>
+      <div class="form-floating float-pass-2 mb-3 mt-3">
+        <%= f.text_field :description, autofocus: true, class: "form-control", id: "floatingInput", placeholder: "Description Here" %>
+        <%= f.label "Project Description", for: "floatingInput" %>
+      </div>
 
-				<div class="mr-5 mt-2 mb-3">
-					<div style="float:right"> <%= f.submit :Submit, class: 'btn btn-primary' %> <br/> </div>
-				</div>
-			</div>
-		<% end %>
+      <div class="actions text-center mb-5">
+        <%= f.submit "Submit", class:"btn btn-custom-primary", style:"width:100%" %>
+      </div>
+      <% end %>
+
     </div>
   </div>
-  <br/> <br/>
-</div>
-

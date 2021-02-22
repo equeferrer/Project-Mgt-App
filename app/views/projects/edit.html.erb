@@ -1,34 +1,28 @@
-<h1> Edit Project</h1>
-
-<%#= form_with scope:@article, url:article_update_path, do |f| %>
-<%= form_for @project, url:project_path(@project) do |f| %>
-<%#= form_with scope:@project, url: edit_project_path(@project) do |f| %>
-
-<%#= form_for url: article_update_path(@article), local:true do |f| %>
-<%#= form_with scope:@article, url: article_create_path , local:true do |f| %>
-
-	<p>
-	   <%= f.label :name %> <br/>
-	   <%= f.text_field :name %>
-	</p> 
-
-	<p>
-	   <%= f.label :description %> <br/>
-	   <%= f.text_area :description%> <%#, style: 'width:100%;', :columns => 100, :rows => 5 %>
-	</p> 
-
-	<p>
-	   <%= f.submit "Update Post" %> <br/>
-	</p> 
-<% end %>
-
-<p>
 	<% if @project.errors.any?%>
-		<ul>
-			<% @project.errors.full_messages.each do |message| %>
-				<li> <%= message %> </li>
-			<% end %>
-		</ul>
-
+		<div class="alert alert-warning alert-dismissible" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<strong>Whoops!</strong> <%= @project.errors.full_messages.to_sentence %>
+		</div>
 	<% end%>
-</p>
+
+  <div class="container mt-5">
+    <div class="form-layout-center account-form mt-5 task--card">
+      <h4 class="text-center mb-4 mt-2 purple-text" style="color:gray">Create a new project</h4>
+			<%= form_for @project, url:project_path(@project) do |f| %>
+      <div class="form-floating float-pass-2 mb-3 mt-3">
+        <%= f.text_field :name, autofocus: true, class: "form-control", id: "floatingInput", placeholder: "New Project Name" %>
+        <%= f.label "Project Name", for: "floatingInput" %>
+      </div>
+
+      <div class="form-floating float-pass-2 mb-3 mt-3">
+        <%= f.text_field :description, autofocus: true, class: "form-control", id: "floatingInput", placeholder: "Description Here" %>
+        <%= f.label "Project Description", for: "floatingInput" %>
+      </div>
+
+      <div class="actions text-center mb-5">
+        <%= f.submit "Submit", class:"btn btn-custom-primary", style:"width:100%" %>
+      </div>
+      <% end %>
+
+    </div>
+  </div>

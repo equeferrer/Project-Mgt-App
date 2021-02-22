@@ -38,14 +38,14 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
     patch project_path(@project), params: {
       project: { name: 'New Name' }
     }
-    assert_redirected_to projects_path
+    assert_redirected_to project_path(@project)
   end
 
   test "05. should delete project" do
     assert_difference('Project.count', -1) do
       delete project_path @project
     end
-    # Redirect
+    assert_redirected_to projects_path
   end
 
   test "06. should not get new if not logged in" do
@@ -53,4 +53,21 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
     get new_project_path
     assert_redirected_to new_user_session_path
   end
+
+  test "07. should show project" do
+    get projects_path @project
+    assert_response :success
+  end
+
+  # test "08. should not show project if it belongs to different user" do
+  #   @new_project = Project.create(name: 'New Project', user_id: 1)
+  #   @new_project.save
+  #   sign_out :user
+  #   get '/users/sign_in'
+  #   sign_in users(:two)
+  #   post user_session_url
+
+  #   get projects_path @new_project
+  #   assert_redirected_to projects_path
+  # end
 end

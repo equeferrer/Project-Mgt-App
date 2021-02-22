@@ -1,25 +1,34 @@
-<h1> NEW TASK </h1>
-
 	<% if @task.errors.any?%>
 		<div class="alert alert-warning alert-dismissible" role="alert">
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			<strong>Whoops!</strong> <%= @task.errors.full_messages.to_sentence %>
 		</div>
 	<% end%>
-<%# <div class="d-flex justify-content-between p-5">
-  <h1> Welcome! </h1>
-  <button class="btn custom-btn-2" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-		Create Post
-  </button>
-</div> %>
 
+	<div class="container mt-5">
+		<div class="form-layout-center account-form mt-5 task--card">
+			<h4 class="text-center mb-4 mt-2" style="color:gray">Create a new task</h4>
+      <%= form_with scope:@task, url: category_tasks_path , local:true do |f| %>
 
-<div class="container mx-5 my-5">
-  <div class="">
-		<div>
-    <%= render 'form' %>
-		
-    </div>
-  </div>
-  <br/> <br/>
-</div>
+			<div class="form-floating float-pass-2 mb-3 mt-3">
+				<%= f.text_field :name, autofocus: true, class: "form-control", id: "floatingInput", placeholder: "Sample Task" %>
+				<%= f.label "Task Name", for: "floatingInput" %>
+			</div>
+
+      <div class="form-floating float-pass-2 mb-3 mt-3">
+				<%= f.text_field :priority_level, autofocus: true, class: "form-control", id: "floatingDropdown", placeholder: "High Priority" %>
+				<%= f.label "Priority Level (DROP DOWN)", for: "floatingDropdown" %>
+			</div>
+
+      <div class="form-floating float-pass-2 mb-3 mt-3">
+				<%= f.text_field :due_date, autofocus: true, class: "form-control", id: "floatingDueDate", placeholder: "01-20-2020" %>
+				<%= f.label "Deadline (Custom Field)", for: "floatingDueDate" %>
+			</div>
+
+			<div class="actions text-center mb-5">
+				<%= f.submit "Create Task", class:"btn btn-custom-primary", style:"width:100%" %>
+			</div>
+			<% end %>
+
+		</div>
+	</div>

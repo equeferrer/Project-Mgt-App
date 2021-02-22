@@ -1,0 +1,24 @@
+	<% if @task.errors.any?%>
+		<div class="alert alert-warning alert-dismissible" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<strong>Whoops!</strong> <%= @task.errors.full_messages.to_sentence %>
+		</div>
+	<% end%>
+
+
+	<div class="container mt-5">
+		<div class="form-layout-center account-form mt-5 task--card">
+			<h4 class="text-center mb-4 mt-2 purple-text" style="color:gray">Edit task</h4>
+			<%= form_for @task, url:task_path(@task) do |f| %>
+			<div class="form-floating float-pass-2 mb-3 mt-3">
+				<%= f.text_field :name, autofocus: true, class: "form-control", id: "floatingInput", placeholder: "Sample Task" %>
+				<%= f.label "Task Name", for: "floatingInput" %>
+			</div>
+
+			<div class="actions text-center mb-5">
+				<%= f.submit "Update Task", class:"btn btn-custom-primary", style:"width:100%" %>
+			</div>
+			<% end %>
+
+		</div>
+	</div>

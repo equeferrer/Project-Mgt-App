@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 .column{
-  width: 400px !important;
+  // width: 400px !important;
 }
 
 .project--column{
@@ -12,21 +12,204 @@
 
 .category--card{
   align-self: start;
-  background-color: lightgray;
+  background-color: #e8ecf4;
   border-radius: 4px;
+  min-width: 300px;
+}
+
+.purple-text{
+  color: #682da4
 }
 
 .task--card {
-  background-color: ghostwhite;
-  background: ghostwhite;
+  // background-color: rgba(102, 153, 204, 0.25);
+  box-shadow: rgba(0, 0, 0, 0.10) 0 0 5px;
+  background-color: rgba(250,250,250,0.9);
   box-sizing: border-box;
   border-radius: 4px;  
   padding: 8px;
-  margin-bottom: 4px;
+  margin-bottom: 10px;
+
 }
 
 .project--card{
   align-self: start;
   background-color: lightgray;
   border-radius: 4px;
+  background-image: linear-gradient(to left top, #d16ba5, #c45da5, #b64fa6, #a443a7, #9039aa, #8335a8, #7631a6, #682da4, #632b9c, #5e2995, #5a278d, #552586);
+  color: white !important;
+  text-decoration: none;
+  height: 150px;
+  width: 300px;
+}
+
+.hover--only{
+  display:none;
+  margin-top: -20px;
+}
+
+.light--card{
+  opacity: 0.7 !important;
+  align-self: start;
+  background-color: lightgray;
+  border-radius: 4px;
+  background-image: linear-gradient(to left top, #d16ba5, #c45da5, #b64fa6, #a443a7, #9039aa, #8335a8, #7631a6, #682da4, #632b9c, #5e2995, #5a278d, #552586);
+  color: white !important;
+  text-decoration: none;
+  height: 150px;
+  width: 300px;
+}
+
+.light--card:hover{
+  opacity: 1.0 !important;
+  text-decoration: underline !important;
+}
+
+.project--card:hover h3{
+  display: none;
+}
+
+.light--card:hover h3{
+  margin-top: 1.5rem !important;
+}
+
+.project--card:hover{
+  filter: grayscale(50%) drop-shadow(2px 2px 2px gray) contrast(130%);
+}
+
+.project--card:hover .hover--only{
+  display: block;
+}
+
+.category--container{
+  margin-left: 50px;
+  padding-right: 50px;
+}
+
+#category--container ::-webkit-scrollbar-track{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+	border-radius: 10px;
+}
+
+#category--container ::-webkit-scrollbar{
+	height: 5px !important;
+	background-color: #F5F5F5;
+}
+
+#category--container ::-webkit-scrollbar-thumb{
+	border-radius: 10px;
+	background: #682da4 
+  
+  // -webkit-gradient(linear,
+	// 								   left bottom,
+	// 								   left top,
+	// 								   color-stop(0.44, rgb(122,153,217)),
+	// 								   color-stop(0.72, rgb(73,125,189)),
+	// 								   color-stop(0.86, rgb(28,58,148)));
+}
+
+.pad-title{
+  padding-left:10px;
+}
+
+.lower-right{
+  text-align: right !important;
+}
+
+.pad-right{
+  margin-right:10px;
+}
+
+// DELETE ME, TEST ONLY
+.test-prio{
+  border: 1px solid gray;
+  font-size: 10px;
+  padding: 0 10px;
+  border-radius: 10px;
+}
+
+.no-line{
+  text-decoration: none;
+}
+
+.create--task{
+  opacity: 0.75;
+}
+
+.create--task:hover{
+  transition: ease-in;
+  opacity: 1.0;
+  background-color: rgba(250,250,250,0.9);
+  box-shadow: rgba(0, 0, 0, 0.10) 0 0 5px;
+  color: black;
+  box-sizing: border-box;
+  border-radius: 4px;  
+  padding:1rem !important;
+}
+
+.proj-icons{
+  margin-left: 90px;
+  margin-right: -50px;
+}
+
+.red-icon{
+  color: red !important;
+  opacity: 0.5;
+}
+
+.red-icon:hover{
+  opacity: 1;
+}
+
+.edit-task-link{
+  text-decoration: none !important;
+  // font-size: 10px;
+}
+
+.edit-task-link:hover{
+  text-decoration: underline !important;
+}
+
+.small-icon{
+  font-size:10px;
+}
+
+.light--category{
+  opacity: 0.7;
+  border: 2px dashed #682da4 ;
+}
+
+.light--category:hover{
+  opacity:1.0;
+}
+
+.small-custom-btn{
+  font-size:0.75rem !important;
+  background-color: transparent;
+  border: 1px dotted #552586 !important;
+  text-decoration: none !important;
+  color: #552586 !important;
+  padding: 0rem 0.5rem !important;
+  opacity: 0.75 !important;
+}
+
+.small-custom-btn:hover{
+  background-color: #552586;
+  transition: ease-in;
+  border: 1px solid #552586 !important;
+  color: white !important;
+  padding: 0rem 0.5rem !important;
+  opacity: 1 !important;
+}
+
+.red-custom-btn{
+  border: 1px dotted red !important;
+  color: red !important;
+}
+
+.red-custom-btn:hover{
+  background-color: red !important;
+  border: 1px solid red !important;
+  color: white !important;
 }
