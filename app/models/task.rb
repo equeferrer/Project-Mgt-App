@@ -6,7 +6,6 @@ class Task < ApplicationRecord
   belongs_to :category
   belongs_to :user
 
-  # scope :priority_tasks, -> { where('due_date <= "#{Date.today}" and completed = false') }
   scope :priority, -> { where("completed = false and due_date <= '#{Date.today}'") }
 
 

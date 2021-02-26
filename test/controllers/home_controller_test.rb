@@ -58,8 +58,8 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "8. should only show incomplete tasks with due date on/before today" do
-    @second_task = Task.create(name: "Second Task!", priority_level: "1", category_id: @category.id, completed: true,
-                              user_id: 1, project_id: @category.project_id, due_date: "#{Time.now.year}-#{Time.now.month}-#{Time.now.day-2}")
+    @second_task = Task.create(name: "Second Task!", priority_level: "1", category_id: @category.id, completed: false,
+                              user_id: 1, project_id: @category.project_id, due_date: "#{Time.now.year}-#{Time.now.month}-#{Time.now.day}")
     @third_task = Task.create(name: "Third Task!", priority_level: "1", category_id: @category.id, 
                               user_id: 1, project_id: @category.project_id, due_date: "#{Time.now.year}-#{Time.now.month}-#{Time.now.day-1}")
     @fourth_task = Task.create(name: "Fourth Task!", priority_level: "1", category_id: @category.id, 

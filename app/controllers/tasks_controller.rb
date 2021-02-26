@@ -4,10 +4,6 @@ class TasksController < ApplicationController
   before_action :set_task_user, only: [:edit, :update, :destroy]
   before_action :owns_task?, only: [:edit, :update, :destroy]
 
-  # def index
-  #   @tasks = @category.tasks
-  # end
-  
   def new 
     @task = current_user.tasks.build 
   end

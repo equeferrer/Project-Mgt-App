@@ -14,17 +14,12 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     @task.save
   end
 
-  # test "01. should get index of tasks" do
-  #   get category_tasks_path @category
-  #   assert_response :success
-  # end
-
-  test "02. should get new action of tasks" do
+  test "01. should get new action of tasks" do
     get new_category_task_path @category
     assert_response :success
   end
 
-  test "03. should get new, create task, then redirect" do
+  test "02. should get new, create task, then redirect" do
     get new_category_task_path @category
     assert_response :success
 
@@ -35,18 +30,18 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "04. should get edit" do
+  test "03. should get edit" do
     get edit_task_path @task
     assert_response :success
   end
 
-  test "05. should be able to update category title, description, duedate, priority level" do
+  test "04. should be able to update category title, description, duedate, priority level" do
     patch task_path @task,
     params: { task: { name: 'Edited Task', priority_level: "2", due_date: "2021-02-12" } }
     assert_redirected_to project_path(@task.project_id)
   end
 
-  test "06. should delete category" do
+  test "05. should delete category" do
     assert_difference('Task.count', -1) do
       delete task_path @task
     end

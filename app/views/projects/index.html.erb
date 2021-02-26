@@ -1,7 +1,6 @@
 <div class="container mt-5">
   <h1 class="mb-3 mx-3"> <%= current_user.first_name%>'s Projects </h1>
   <div class="d-flex flex-row flex-wrap mb-5">
-    <%# if !@articles.empty? %>
     <% @projects.each do |project| %>
       <a href="<%= project_path(project) %>" class="project--card m-2 p-3"> 
         <div>

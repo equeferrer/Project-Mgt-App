@@ -19,9 +19,7 @@ class ProjectsController < ApplicationController
 
   def create
     @project = current_user.projects.build(project_params)
-    @projects = current_user.projects
-    # category.title = params[:title]
-    
+    @projects = current_user.projects   
     if @project.save
       redirect_to project_path(@project)
     else

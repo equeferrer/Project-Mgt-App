@@ -14,12 +14,7 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
     @category.save
   end
 
-  # test "01. should get index" do
-  #   get project_categories_path @project
-  #   assert_response :success
-  # end
-
-  test "02. should get new, create category, then redirect" do
+  test "01. should get new, create category, then redirect" do
     get new_project_category_path @project
     assert_response :success
 
@@ -30,25 +25,24 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "03. should get edit" do
+  test "02. should get edit" do
     get edit_category_path @category
     assert_response :success
   end
 
-  test "04. should be able to update category title, redirects after" do
+  test "03. should be able to update category title, redirects after" do
     patch category_path @category, params: { category: { title: 'New Title' } }
-    # assert Category.find(@category.id).title == 'New Title' 
     assert_redirected_to project_path(@category.project_id)
   end
 
-  test "05. should delete category" do
+  test "04. should delete category" do
     assert_difference('Category.count', -1) do
       delete category_path @category
     end
     assert_redirected_to project_path @project
   end
 
-  test "06. should not get new if not logged in" do
+  test "05. should not get new if not logged in" do
     sign_out :user
     get new_project_category_path @project
     assert_redirected_to new_user_session_path
