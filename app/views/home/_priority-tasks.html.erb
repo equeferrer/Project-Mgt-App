@@ -1,0 +1,29 @@
+  <details open class="category--card p-2">
+    <summary> <span class="summary-header"> Priorities for today: </span> </summary>
+    <table class="table">
+      <thead>
+        <tr> 
+          <th class="gray-text text-center col-md-1"><small>Priority</small> </th>
+          <th class="gray-text text-center col-md-3"><small>Due Date</small></th>
+          <th class="gray-text text-center col-md-6"><small>Task</small> </th>
+          <th class="gray-text text-center col-md-2 "></th>
+        </small> </tr>
+      </thead>
+      <tbody>
+        <% @priority_tasks.order("priority_level ASC").each do |task| %>
+        <tr class="task-table">
+          <td class="text-center task-text"> <span class="home-prio-badge badge-<%= task.priority_color %>"></span> </td>
+          <td class="task-text text-center"><small> <i class="fa fa-calendar">&nbsp;</i><%= task.due_date.try(:strftime, ("%b. %d, '%y"))%> </small></div> </td>
+          <td class="task-text">
+            <small class="edit-task-link"> <%= link_to fa_icon("edit"), edit_task_path(task),  class:"edit-task-link small-icon"%> </small>
+            <%=task.name %> 
+          </td>
+          <td class="task-text"> <small><%= link_to "Project >", project_path(task.project_id), class:"prio-badge" %></small></td>
+        </tr>
+        <% end %> 
+      </tbody>
+    </table>
+  </details>
+
+
+                <small class="blue-text"><%#= link_to fa_icon("edit"), edit_category_path(category)%></small> 

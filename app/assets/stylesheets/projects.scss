@@ -17,6 +17,10 @@
   min-width: 300px;
 }
 
+.custom-width{
+  width: 300px !important;
+}
+
 .purple-text{
   color: #682da4
 }
@@ -51,18 +55,22 @@
 .light--card{
   opacity: 0.7 !important;
   align-self: start;
-  background-color: lightgray;
+  background-color: transparent;
+  // opacity: 0.7;
+  border: 3px dashed #682da4 ;
   border-radius: 4px;
-  background-image: linear-gradient(to left top, #d16ba5, #c45da5, #b64fa6, #a443a7, #9039aa, #8335a8, #7631a6, #682da4, #632b9c, #5e2995, #5a278d, #552586);
-  color: white !important;
+  // background-image: linear-gradient(to left top, #d16ba5, #c45da5, #b64fa6, #a443a7, #9039aa, #8335a8, #7631a6, #682da4, #632b9c, #5e2995, #5a278d, #552586);
+  color: #682da4 !important;
   text-decoration: none;
   height: 150px;
   width: 300px;
+  // filter: sepia(0.5);
 }
 
 .light--card:hover{
   opacity: 1.0 !important;
   text-decoration: underline !important;
+  // font-weight: 800 !important;
 }
 
 .project--card:hover h3{
@@ -71,10 +79,13 @@
 
 .light--card:hover h3{
   margin-top: 1.5rem !important;
+  filter: none !important;
 }
 
 .project--card:hover{
-  filter: grayscale(50%) drop-shadow(2px 2px 2px gray) contrast(130%);
+  background-image: none !important;
+  background-color: #7631a6 !important;
+  filter: drop-shadow(2px 2px 2px gray);
 }
 
 .project--card:hover .hover--only{
@@ -119,14 +130,6 @@
 
 .pad-right{
   margin-right:10px;
-}
-
-// DELETE ME, TEST ONLY
-.test-prio{
-  border: 1px solid gray;
-  font-size: 10px;
-  padding: 0 10px;
-  border-radius: 10px;
 }
 
 .no-line{
@@ -212,4 +215,58 @@
   background-color: red !important;
   border: 1px solid red !important;
   color: white !important;
+}
+
+.prio-badge{
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 10px;
+  width: 90px !important;
+  text-align: center;
+  letter-spacing: 1.5px;
+  opacity: 0.8;
+  align-self: center;
+}
+
+.badge-blue{
+  background-color: blue !important;
+  color: white !important;
+  // border-radius: 10px;
+  width: 70px !important;
+  height: auto;
+  letter-spacing: 1px !important;
+}
+
+.badge-red{
+  background-color: #CC001B !important;
+}
+
+.badge-red::after{
+  content: 'Urgent';
+  color: white;
+  padding: 0 14px;
+}
+
+.badge-yellow{
+  background-color: #FFD400 !important;
+}
+
+.badge-yellow::after{
+  content: 'Medium';
+  color: black !important;
+  padding: 0 13px;
+}
+
+.badge-gray{
+  background: lightgray !important;
+}
+
+.badge-gray::after{
+  content: 'Low';
+  color: black !important;
+  padding: 0 23px;
+}
+
+.badge-hidden{
+  visibility: hidden !important;
 }

@@ -2,12 +2,10 @@
 
 one:
   name: MyString
-  description: MyString
   priority_level: 1
   due_date: 2021-02-11 13:29:19
 
 two:
   name: MyString
-  description: MyString
   priority_level: 1
   due_date: 2021-02-11 13:29:19

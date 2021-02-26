@@ -1,8 +1,5 @@
 	<% if @task.errors.any?%>
-		<div class="alert alert-warning alert-dismissible" role="alert">
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			<strong>Whoops!</strong> <%= @task.errors.full_messages.to_sentence %>
-		</div>
+		<%= render 'tasks/alert'%>
 	<% end%>
 
 
@@ -15,7 +12,24 @@
 				<%= f.label "Task Name", for: "floatingInput" %>
 			</div>
 
-			<div class="actions text-center mb-5">
+			<div class="d-flex flex-row justify-content-between">
+				<div class="label-task black-text mb-3 mt-1 col-md-4">
+					<%= f.label "Priority Level", for: "dropdown" %> <br>
+					<%= f.select :priority_level, Task::PRIORITY_OPTIONS, id: "dropdown",class: "form-control" %>
+				</div>
+
+				<div class="label-task black-text mb-3 mt-1">
+					<%= f.label "Due date", for: "due-date" %>
+					<%= f.date_field :due_date, class: "form-control", id: "due-date" %>
+				</div>
+			</div>
+
+			<div class="mb-1 form-check form-text text-center">
+				<%= f.check_box :completed, class:"form-text", id:"task-completed"  %>
+				<%= f.label "Mark task as completed", for:"task-completed", class:"label-task black-text" %>
+			</div>
+
+			<div class="actions text-center mb-3 mt-3">
 				<%= f.submit "Update Task", class:"btn btn-custom-primary", style:"width:100%" %>
 			</div>
 			<% end %>

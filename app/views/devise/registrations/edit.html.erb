@@ -1,9 +1,10 @@
+<%= render "devise/shared/error_messages", resource: resource %>
+
 <div class="container mt-5 container-form">
   <div class="form-layout-center-large account-form-edit mt-5">
     <%= link_to "< Back", :back %>
     <h2 class="text-center mb-4 custom" style="color:gray">Edit Profile</h2>
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
     <div class="form-row d-flex flex-row justify-content-between mt-4">
       <div class="col form-group col-md-4-custom">
         <div class="form-floating mb-1">

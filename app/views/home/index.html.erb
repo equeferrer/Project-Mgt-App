@@ -1,7 +1,45 @@
 <% if user_signed_in? %>
 
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+  <div class="container mt-5 d-flex flex-row">
+    <div class="col-md-5 mr-custom">
+      <% if @projects.length < 2 %>
+        <div class="mt-4 mb-2 p-3"> </div>
+      <% end %>
+        <% if @priority_tasks.any?%>
+          <%= render 'home/priority-tasks' %>
+        <% else %>
+          <%= image_tag("home-bg-2.png", class:"", width:"90%") %>
+          <h3 class="text-center"> No tasks due today! :) </h3>
+        <% end %> 
+    </div>
+
+    <div class="col-md-6">
+      <div class="d-flex flex-column">
+        <% if @projects.length < 2 %>
+          <div class="mt-5 mb-3"> </div>
+        <% end %>
+        <div class="d-flex flex-row category--card mb-3 mx-custom">
+          <%= image_tag("bg-right-2.png", class:"", width:"30%") %>
+          <div class="mt-5 mr-custom">
+            <h3> Hello <%= current_user.first_name%>! </h3>
+            <% if @priority_tasks.length == 1%>
+              You have <%= @priority_tasks.length %> task due today!
+            <% elsif @priority_tasks.length > 1 %>
+              You have <%= @priority_tasks.length %> tasks due today!
+            <% else %>
+              Good job! You don't have any pending tasks for today!
+            <% end %>
+          </div>
+        </div>
+        <div class="d-flex flex-row flex-wrap mb-3">
+          <%= render 'home/projects'%>
+        </div>
+        <% if @projects.any?%>
+          <h4><%= link_to "View all projects > ", projects_path, class:"btn btn-primary mb-3 mx-3 float-right" %> </h4>
+        <% end %>
+      </div>
+    </div>
+  </div>
 
 <% else %>
   <div class="container">
@@ -12,7 +50,6 @@
         <%= link_to "TRY IT FOR FREE", new_user_registration_path, class:"btn btn-custom-primary header-btn mt-3" %>
       </div>
       <div class="col-md-5">
-        <%# <h2> Test 2 </h2>  %>
         <%= image_tag("home-bg-1.png", class:"home-img-1") %>
         <%= image_tag("home-bg-3.png", class:"home-img-2") %>
         <div class="shape">

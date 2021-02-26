@@ -1,8 +1,5 @@
-	<% if @project.errors.any?%>
-		<div class="alert alert-warning alert-dismissible" role="alert">
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			<strong>Whoops!</strong> <%= @project.errors.full_messages.to_sentence %>
-		</div>
+  <% if @project.errors.any?%>
+    <%= render 'projects/alert' %>
 	<% end%>
 
   <div class="container mt-5">
@@ -10,13 +7,13 @@
       <h4 class="text-center mb-4 mt-2 purple-text" style="color:gray">Create a new project</h4>
 			<%= form_with scope:@project, url: projects_path , local:true do |f| %>
       <div class="form-floating float-pass-2 mb-3 mt-3">
-        <%= f.text_field :name, autofocus: true, class: "form-control", id: "floatingInput", placeholder: "New Project Name" %>
+        <%= f.text_field :name, class: "form-control", id: "floatingInput", placeholder: "New Project Name" %>
         <%= f.label "Project Name", for: "floatingInput" %>
       </div>
 
       <div class="form-floating float-pass-2 mb-3 mt-3">
-        <%= f.text_field :description, autofocus: true, class: "form-control", id: "floatingInput", placeholder: "Description Here" %>
-        <%= f.label "Project Description", for: "floatingInput" %>
+        <%= f.text_field :description, class: "form-control", id: "floatingInputDescription", placeholder: "Description Here" %>
+        <%= f.label "Project Description", for: "floatingInputDescription" %>
       </div>
 
       <div class="actions text-center mb-5">
