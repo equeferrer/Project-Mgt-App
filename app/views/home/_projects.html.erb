@@ -1,5 +1,5 @@
 <% @projects.order("updated_at ASC").last(3).each do |project| %>
-  <a href="<%= project_path(project) %>" class="project--card m-2 p-3"> 
+  <a href="<%= project_path(project) %>" class="project--card"> 
     <div>
       <div class="p-2 mt-3 mx-2 project--column">
         <h3 class="p-0 text-center"> <%= project.name %> </h3>

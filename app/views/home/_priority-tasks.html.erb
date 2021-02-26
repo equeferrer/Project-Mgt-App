@@ -1,10 +1,10 @@
   <details open class="category--card p-2">
-    <summary> <span class="summary-header"> Priorities for today: </span> </summary>
+    <summary> <span class="summary-header"> Priorities for today: <%= Time.now.strftime("%b. %d") %> </span> </summary>
     <table class="table">
       <thead>
         <tr> 
           <th class="gray-text text-center col-md-1"><small>Priority</small> </th>
-          <th class="gray-text text-center col-md-3"><small>Due Date</small></th>
+          <th class="gray-text text-center col-md-3"><small>Due <span class="due">Date</span></small></th>
           <th class="gray-text text-center col-md-6"><small>Task</small> </th>
           <th class="gray-text text-center col-md-2 "></th>
         </small> </tr>

@@ -1,8 +1,8 @@
 <div class="container mt-5">
   <h1 class="mb-3 mx-3"> <%= current_user.first_name%>'s Projects </h1>
-  <div class="d-flex flex-row flex-wrap mb-5">
+  <div class="d-flex flex-row flex-wrap mb-5 justify-con">
     <% @projects.each do |project| %>
-      <a href="<%= project_path(project) %>" class="project--card m-2 p-3"> 
+      <a href="<%= project_path(project) %>" class="project--card"> 
         <div>
           <div class="p-2 mt-3 mx-2 project--column">
               <h3 class="p-0 text-center"> <%= project.name %> </h3>
@@ -15,7 +15,7 @@
         </div>
       </a>
     <% end %>
-    <a href="<%= new_project_path %>" class="light--card m-2 p-3"> 
+    <a href="<%= new_project_path %>" class="light--card"> 
       <h3 class="p-2 text-center mt-3"> + New project </h3>
     </a>
   </div>

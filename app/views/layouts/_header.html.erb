@@ -1,6 +1,6 @@
 <header id="header"> 
   <nav id="nav-bar">
-    <div><%= link_to "Workday", root_path, class:"header-link" %><img src="" id="header-img" alt=""></a></div>
+    <div class="logo"><%= link_to "Workday", root_path, class:"header-link" %></a></div>
   <!-- MENU TOGGLER -->
     <input type="checkbox" class="toggle-menu"> 
     <div class="hamburger">
@@ -20,12 +20,12 @@
           </li>
         <%# </div> %>
       <% end %>
-    </ul>
+    <%# </ul>  %>
     <%# <div class="float-right my-2 my-lg-0"> %>
       <% if user_signed_in?%>
         <%# <div class="d-flex flex-row flex-nowrap"> %>
-          <li class=""> <%= link_to "Edit Profile", edit_user_registration_path, class:"btn btn-outline-secondary mx-2" %> </li>
-          <li class=""> <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class:"btn btn-custom-primary mx-2" %> </li>
+          <li class="nav-item"> <%= link_to "Edit Profile", edit_user_registration_path, class:"btn btn-outline-secondary mx-2" %> </li>
+          <li class="nav-item"> <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class:"btn btn-custom-primary mx-2" %> </li>
         <%# </div> %>
       <% else %>
         <%# <div class="d-flex flex-row flex-nowrap"> %>
