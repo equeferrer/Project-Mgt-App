@@ -11,7 +11,7 @@
 				<%= f.label "Task Name", for: "floatingInput" %>
 			</div>
 
-			<div class="d-flex flex-row justify-content-between">
+			<div class="d-flex flex-row justify-content-between task-flex">
 				<div class="label-task black-text mb-3 mt-1 col-md-4">
 					<%= f.label "Priority Level", for: "dropdown" %> <br>
 					<%= f.select :priority_level, Task::PRIORITY_OPTIONS, id: "dropdown",class: "form-control" %>

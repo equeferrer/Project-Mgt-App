@@ -20,7 +20,7 @@
     <div class="text-center mt-3 mb-3">    <hr/>
       <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
         <small> <%= link_to "Sign up for an account", new_registration_path(resource_name) %> </small>
-      <% end %> <span class="gray-text">&nbsp; &#8226; &nbsp;</span> 
+      <% end %> <span class="gray-text dot">&nbsp; &#8226; &nbsp;</span> 
       <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
         <small> <%= link_to "Forgot your password?", new_password_path(resource_name) %> </small>
       <% end %>
