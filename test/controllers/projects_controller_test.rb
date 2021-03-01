@@ -55,16 +55,4 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
     get projects_path @project
     assert_response :success
   end
-
-  # test "08. should not show project if it belongs to different user" do
-  #   @new_project = Project.create(name: 'New Project', user_id: 1)
-  #   @new_project.save
-  #   sign_out :user
-  #   get '/users/sign_in'
-  #   sign_in users(:two)
-  #   post user_session_url
-
-  #   get projects_path @new_project
-  #   assert_redirected_to projects_path
-  # end
 end
