@@ -7,7 +7,6 @@ Found below are the different features and screenshots of the application ✨
 **Features**
 - Test Driven Development (TDD) with MiniTest
 - Nested Resources
-- Devise
 - Enabled users to show incomplete tasks due on or before the day of viewing. 
 - Fully responsive design on mobile, tablet and desktop devices.
 
