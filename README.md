@@ -1,29 +1,10 @@
-# README
+# PROJECT MANAGEMENT APP
+This application allows users to organize projects through custom categories and tasks. You can see the live application [here](https://eque-workday.herokuapp.com/)
 
-Project Management App
-- Test Driven Development (TDD)
+
+**Features**
+- Test Driven Development (TDD) with MiniTest
 - Nested Resources
 - Devise
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Enabled users to show incomplete tasks due on or before the day of viewing. 
+- Fully responsive design on mobile, tablet and desktop devices.
