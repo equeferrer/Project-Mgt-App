@@ -12,5 +12,5 @@ Found below are the different features and screenshots of the application ✨
 - Fully responsive design on mobile, tablet and desktop devices.
 
 **Screenshots**
-![Project-App](https://user-images.githubusercontent.com/68733895/113649940-edf45780-96c1-11eb-9e04-3ce99e22d5b4.JPG)
-![Project-App-2](https://user-images.githubusercontent.com/68733895/113649945-efbe1b00-96c1-11eb-97ea-a792bee62edc.JPG)
+![image](https://user-images.githubusercontent.com/68733895/113650363-ab7f4a80-96c2-11eb-8ae7-629f8857894d.png)
+![Project-App](https://user-images.githubusercontent.com/68733895/113650424-c18d0b00-96c2-11eb-816f-d4e9feeac4d9.JPG)
